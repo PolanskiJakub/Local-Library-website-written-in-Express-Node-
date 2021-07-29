@@ -1,0 +1,20 @@
+extends layout
+
+block content
+  h1= title
+
+  ul
+    - book_list.sort(function(a, b) {let textA = a.title.toUpperCase(); let textB = b.title.toUpperCase(); return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;});
+    each book in book_list
+      each genre in book.genre
+        if (genre.name === 'Fantasy')
+          li
+            a(href=book.url, style={color: 'green'}) #{book.title}
+            |  (#{book.author.name})
+        else if (genre.name === 'French Poetry')
+        else if (genre.name === 'Science Fiction')
+            li
+              a(href=book.url, style={color: 'red'}) #{book.title}
+              |  (#{book.author.name})
+    else
+      li There are no books.
